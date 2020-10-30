@@ -1,6 +1,6 @@
 # Olá, Seja muito Bem Vindo(a).
 
-## Lembrete: Todos os script's desse repositório são para vRP 1.0 ( mais conhecida como vRPex ).
+## Lembrete: Todos os script's desse repositório são para vRP 1.0 (mais conhecida como vRPex).
 
 ### Resource arc_hospital
 
