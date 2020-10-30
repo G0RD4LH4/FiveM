@@ -15,3 +15,15 @@
  **Creditos:**
  - G0RD4LH4 | Desenvolvedor
  - Lafa2k | Map
+
+### Resource arc_vest
+
+ **Recursos:**
+ - O colete só aparece se o jogador realmente tiver ele.
+ 
+ **Informações:**
+ - Se o jogador estiver de colete e ele perder ?
+ - Resposta: Ele vai perder automaticamente o colete do corpo.
+ 
+  **Creditos:**
+  - G0RD4LH4 | Desenvolvedor
