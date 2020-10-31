@@ -27,3 +27,17 @@
  
   **Creditos:**
   - G0RD4LH4 | Desenvolvedor
+
+### Resource job_driver
+
+ **Recursos:**
+ - Primeiramente chega na central de Ônibus e vá até o empresário e inicia o trabalho.
+ - Depois vai até o local marcado no mapa, lembrando que para trabalhar o jogador precisa usar o __veículo: coach__ ( Caso queira alterar, basta alterar na linha 195 do client-side ).
+ - Assim que o jogador chegar na última rota, ele recebe um bônus de 1000 dólares ( Caso queira alterar, basta alterar na linha 198 do client-side ).
+ 
+ **Informações:**
+ - Eu sei que existe vários empregos por ai parecido com esse, mas esse foi feito por mim do zero e com diversas melhorias.
+ - É possível adicionar mais rotas, só adicionar na variável __deliveries__.
+
+ **Creditos:**
+ - G0RD4LH4 | Desenvolvedor
