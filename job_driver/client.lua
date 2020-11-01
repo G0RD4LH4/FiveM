@@ -189,9 +189,9 @@ Citizen.CreateThread(function()
 
             if distance <= 50.0 then
                 timeDistance = 4
-                DrawMarker(30,deliveries[destiny].x,deliveries[destiny].y,deliveries[destiny].z - 0.50,0,0,0,0,180.0,130.0,0.6,0.8,0.5,rainbow.r,rainbow.g,rainbow.b,150,1,0,0,1)
+                DrawMarker(30,deliveries[destiny].x,deliveries[destiny].y,deliveries[destiny].z - 0.50,0,0,0,0,180.0,130.0,2.1,2.3,2.0,rainbow.r,rainbow.g,rainbow.b,150,1,0,0,1)
                 if distance <= 5.0 then
-                    DrawText3Ds(deliveries[destiny].x,deliveries[destiny].y,deliveries[destiny].z - 0.10, 'PRESSIONE  ~b~E~w~  PARA  FINALIZAR  A  PARADA')
+                    drawTxt('PRESSIONE  ~b~E~w~  PARA  FINALIZAR  A  PARADA',4,0.5,0.93,0.50,255,255,255,180)
                     if IsControlJustPressed(0,38) and IsVehicleModel(GetVehiclePedIsUsing(PlayerPedId()),GetHashKey('coach')) then
                         RemoveBlip(blip)
                         if destiny == 27 then
@@ -239,6 +239,17 @@ function RGBRainbow(frequency)
 	result.b = math.floor( math.sin( curtime * frequency + 4 ) * 127 + 128 )
 
 	return result
+end
+
+function drawTxt(text,font,x,y,scale,r,g,b,a)
+	SetTextFont(font)
+	SetTextScale(scale,scale)
+	SetTextColour(r,g,b,a)
+	SetTextOutline()
+	SetTextCentre(1)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(x,y)
 end
 
 function DrawText3Ds(x,y,z,text)
