@@ -44,6 +44,12 @@ local deliveries = {
     }
 }
 
+RegisterCommand("finalizar",function(source, args)
+    if inService then
+        inService = false
+    end
+end)
+
 Citizen.CreateThread(function()
     while true do
         local timeDistance = 500
