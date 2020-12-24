@@ -9,9 +9,11 @@ vSERVER = Tunnel.getInterface("job_driver")
 local inService = false
 local inSelected = 0
 local inCheckpoint = 0
+local inPoint = 0
 local deliveries = {
     [1] = {
         ["start"] = { 453.66, -600.59, 28.59, 268.58, 0x2E420A24, "csb_reporter" },
+        ["points"] = 27,
         ["coords"] = {
             { 309.95, -760.52, 30.09 },
 	        { 69.59, -974.80, 30.14 },
@@ -59,19 +61,22 @@ Citizen.CreateThread(function()
 
         if inService then
             local distance = #(coords - vector3(deliveries[inSelected]["coords"][inCheckpoint][1],deliveries[inSelected]["coords"][inCheckpoint][2],deliveries[inSelected]["coords"][inCheckpoint][3]))
-            local vehicle = GetVehiclePedIsIn(ped)
-            
+
             if distance <= 50.0 then
                 timeDistance = 4
+                dwText("~b~PONTOS:~w~ "..inPoint.." / "..deliveries[inSelected]["points"], 0.94)
                 DrawMarker(21,deliveries[inSelected]["coords"][inCheckpoint][1],deliveries[inSelected]["coords"][inCheckpoint][2],deliveries[inSelected]["coords"][inCheckpoint][3]+1,0,0,0,0,180.0,130.0,3.0,3.0,2.0,42,137,255,50,1,0,0,1)
                 if distance <= 5.0 and IsVehicleModel(GetVehiclePedIsUsing(ped), GetHashKey("coach")) then
                     if IsControlJustPressed(0, 38) then
                         if inCheckpoint >= #deliveries[inSelected]["coords"] then
-                            PlaySoundFrontend(-1,"RACE_PLACED","HUD_AWARDS",false)
-                            vSERVER.finishWork()
-                            inService = false
+                            if inPoint >= deliveries[inSelected]["points"] then
+                                PlaySoundFrontend(-1,"RACE_PLACED","HUD_AWARDS",false)
+                                vSERVER.finishWork()
+                                inService = false
+                            end
                         else
                             inCheckpoint = inCheckpoint + 1
+                            inPoint = inPoint + 1
 
                             SetNewWaypoint(deliveries[inSelected]["coords"][inCheckpoint][1],deliveries[inSelected]["coords"][inCheckpoint][2])
                         end
@@ -89,6 +94,7 @@ Citizen.CreateThread(function()
                         inService = true
                         inSelected = tonumber(k)
                         inCheckpoint = 1
+                        inPoint = 1
 
                         SetNewWaypoint(deliveries[inSelected]["coords"][inCheckpoint][1],deliveries[inSelected]["coords"][inCheckpoint][2])
                     end
@@ -124,4 +130,15 @@ function DrawText3Ds(x,y,z,text)
     
 	local factor = (string.len(text))/370
 	DrawRect(_x,_y+0.0125,0.060+factor,0.03,0,0,0,80)
+end
+
+function dwText(text,height)
+	SetTextFont(4)
+	SetTextScale(0.50,0.50)
+	SetTextColour(255,255,255,180)
+	SetTextOutline()
+	SetTextCentre(1)
+	SetTextEntry("STRING")
+	AddTextComponentString(text)
+	DrawText(0.5,height)
 end
